@@ -1,0 +1,81 @@
+class TravelProduct {
+    private String name;
+    private double price;
+
+    public TravelProduct(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public void displayTravelProductDetails() {
+        System.out.println("Product Name: " + name);
+        System.out.println("Price: $" + price);
+    }
+}
+
+class Flight extends TravelProduct {
+    private String airline;
+    private String departureDate;
+
+    public Flight(String name, double price, String airline, String departureDate) {
+        super(name, price);
+        this.airline = airline;
+        this.departureDate = departureDate;
+    }
+
+    @Override
+    public void displayTravelProductDetails() {
+        super.displayTravelProductDetails();
+        System.out.println("Airline: " + airline);
+        System.out.println("Departure Date: " + departureDate);
+    }
+}
+
+class Hotel extends TravelProduct {
+    private String hotelName;
+    private int nights;
+
+    public Hotel(String name, double price, String hotelName, int nights) {
+        super(name, price);
+        this.hotelName = hotelName;
+        this.nights = nights;
+    }
+
+    @Override
+    public void displayTravelProductDetails() {
+        super.displayTravelProductDetails();
+        System.out.println("Hotel Name: " + hotelName);
+        System.out.println("Number of Nights: " + nights);
+    }
+}
+
+class CarRental extends TravelProduct {
+    private String rentalCompany;
+    private int days;
+
+    public CarRental(String name, double price, String rentalCompany, int days) {
+        super(name, price);
+        this.rentalCompany = rentalCompany;
+        this.days = days;
+    }
+
+    @Override
+    public void displayTravelProductDetails() {
+        super.displayTravelProductDetails();
+        System.out.println("Rental Company: " + rentalCompany);
+        System.out.println("Number of Days: " + days);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Flight flight1 = new Flight("Flight to Paris", 599.99, "Air France", "2023-11-15");
+        Hotel hotel1 = new Hotel("Luxury Suite", 199.99, "Grand Hotel", 3);
+        CarRental carRental1 = new CarRental("Compact Car", 49.99, "Budget Rent a Car", 7);
+
+        flight1.displayTravelProductDetails();
+        System.out.println();
+        hotel1.displayTravelProductDetails();
+        System.out.println();
+        carRental1.displayTravelProductDetails();
+    }
