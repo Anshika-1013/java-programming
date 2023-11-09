@@ -1,0 +1,29 @@
+class Outer {
+    int outer_x = 100;
+    int y = 20;
+
+    void test() {
+        InnerClass i1 = new InnerClass();
+        i1.display();
+        i1.show();
+    }
+
+    class InnerClass {
+        int y = 10;
+
+        void display() {
+            System.out.println("Display: outer_x=" + outer_x);
+        }
+
+        void show() {
+            System.out.println(y);
+        }
+    }
+}
+
+class InnerClassDemo {
+    public static void main(String args[]) {
+        Outer outer = new Outer();
+        outer.test();
+    }
+}
