@@ -1,0 +1,328 @@
+import java.util.Scanner;
+
+public class StringMethodsDemo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String text = "We realizes that while our workers were thriving, the surrounding villages were still suffering. It became our goal to uplift their quality of life as well. I remember seeing a family of 4 on a motorbike in the heavy Bombay rain — I knew I wanted to do more for these families who were risking their lives for lack of an alternative” The alternative mentioned here is the Tata Nano, which soon after came as the world’s cheapest car on retail at a starting price of only Rs 1 lakh.";
+
+        while (true) {
+            System.out.println("\nSelect a String method to demonstrate (1-25):");
+            System.out.println("1. charAt()");
+            System.out.println("2. compareTo()");
+            System.out.println("3. concat()");
+            System.out.println("4. contains()");
+            System.out.println("5. endsWith()");
+            System.out.println("6. equals()");
+            System.out.println("7. equalsIgnoreCase()");
+            System.out.println("8. format()");
+            System.out.println("9. getBytes()");
+            System.out.println("10. getChars()");
+            System.out.println("11. indexOf()");
+            System.out.println("12. intern()");
+            System.out.println("13. isEmpty()");
+            System.out.println("14. join()");
+            System.out.println("15. lastIndexOf()");
+            System.out.println("16. length()");
+            System.out.println("17. replace()");
+            System.out.println("18. replaceAll()");
+            System.out.println("19. split()");
+            System.out.println("20. startsWith()");
+            System.out.println("21. substring()");
+            System.out.println("22. toCharArray()");
+            System.out.println("23. toLowerCase()");
+            System.out.println("24. toUpperCase()");
+            System.out.println("25. trim()");
+            System.out.println("0. Exit");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();  // Consume the newline character
+
+            switch (choice) {
+                case 0:
+                    System.out.println("Exiting program.");
+                    scanner.close();
+                    System.exit(0);
+                    break;
+                case 1:
+                    demonstrateCharAt(text, scanner);
+                    break;
+                case 2:
+                    demonstrateCompareTo(text, scanner);
+                    break;
+                case 3:
+                    demonstrateConcat(text, scanner);
+                    break;
+                case 4:
+                    demonstrateContains(text, scanner);
+                    break;
+                case 5:
+                    demonstrateEndsWith(text, scanner);
+                    break;
+                case 6:
+                    demonstrateEquals(text, scanner);
+                    break;
+                case 7:
+                    demonstrateEqualsIgnoreCase(text, scanner);
+                    break;
+                case 8:
+                    demonstrateFormat(text, scanner);
+                    break;
+                case 9:
+                    demonstrateGetBytes(text, scanner);
+                    break;
+                case 10:
+                    demonstrateGetChars(text, scanner);
+                    break;
+                case 11:
+                    demonstrateIndexOf(text, scanner);
+                    break;
+                case 12:
+                    demonstrateIntern(text, scanner);
+                    break;
+                case 13:
+                    demonstrateIsEmpty(text);
+                    break;
+                case 14:
+                    demonstrateJoin(text, scanner);
+                    break;
+                case 15:
+                    demonstrateLastIndexOf(text, scanner);
+                    break;
+                case 16:
+                    demonstrateLength(text);
+                    break;
+                case 17:
+                    demonstrateReplace(text, scanner);
+                    break;
+                case 18:
+                    demonstrateReplaceAll(text, scanner);
+                    break;
+                case 19:
+                    demonstrateSplit(text, scanner);
+                    break;
+                case 20:
+                    demonstrateStartsWith(text, scanner);
+                    break;
+                case 21:
+                    demonstrateSubstring(text, scanner);
+                    break;
+                case 22:
+                    demonstrateToCharArray(text);
+                    break;
+                case 23:
+                    demonstrateToLowerCase(text);
+                    break;
+                case 24:
+                    demonstrateToUpperCase(text);
+                    break;
+                case 25:
+                    demonstrateTrim(text);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please select a valid option.");
+            }
+        }
+    }
+
+    // Method to demonstrate charAt()
+    private static void demonstrateCharAt(String text, Scanner scanner) {
+        System.out.println("Enter the position to retrieve the character:");
+        int position = scanner.nextInt();
+        scanner.nextLine();  // Consume the newline character
+        if (position >= 0 && position < text.length()) {
+            char character = text.charAt(position);
+            System.out.println("Character at position " + position + ": " + character);
+        } else {
+            System.out.println("Invalid position. Position should be within the string length.");
+        }
+    }
+
+    // Method to demonstrate compareTo()
+    private static void demonstrateCompareTo(String text, Scanner scanner) {
+        System.out.println("Enter a second string to compare:");
+        String secondString = scanner.nextLine();
+        int result = text.compareTo(secondString);
+        System.out.println("Comparison result: " + result);
+    }
+
+    // Method to demonstrate concat()
+    private static void demonstrateConcat(String text, Scanner scanner) {
+        System.out.println("Enter a string to concatenate:");
+        String toConcatenate = scanner.nextLine();
+        String concatenatedText = text.concat(toConcatenate);
+        System.out.println("Concatenated text: " + concatenatedText);
+    }
+
+    // Method to demonstrate contains()
+    private static void demonstrateContains(String text, Scanner scanner) {
+        System.out.println("Enter a substring to check if it's contained in the text:");
+        String substring = scanner.nextLine();
+        boolean contains = text.contains(substring);
+        System.out.println("Does the text contain the substring? " + contains);
+    }
+
+    // Method to demonstrate endsWith()
+    private static void demonstrateEndsWith(String text, Scanner scanner) {
+        System.out.println("Enter a suffix to check if the text ends with it:");
+        String suffix = scanner.nextLine();
+        boolean endsWith = text.endsWith(suffix);
+        System.out.println("Does the text end with the suffix? " + endsWith);
+    }
+
+    // Method to demonstrate equals()
+    private static void demonstrateEquals(String text, Scanner scanner) {
+        System.out.println("Enter another string to compare for equality:");
+        String otherString = scanner.nextLine();
+        boolean areEqual = text.equals(otherString);
+        System.out.println("Are the two strings equal? " + areEqual);
+    }
+
+    // Method to demonstrate equalsIgnoreCase()
+    private static void demonstrateEqualsIgnoreCase(String text, Scanner scanner) {
+        System.out.println("Enter another string to compare for equality ignoring case:");
+        String otherString = scanner.nextLine();
+        boolean areEqualIgnoreCase = text.equalsIgnoreCase(otherString);
+        System.out.println("Are the two strings equal (case-insensitive)? " + areEqualIgnoreCase);
+    }
+
+    // Method to demonstrate format()
+    private static void demonstrateFormat(String text, Scanner scanner) {
+        System.out.println("Enter a format string (e.g., 'Ratan Tata said: \"%s\"'):");
+        String formatString = scanner.nextLine();
+        System.out.println("Formatted text: " + String.format(formatString, text));
+    }
+
+    // Method to demonstrate getBytes()
+    private static void demonstrateGetBytes(String text, Scanner scanner) {
+        byte[] bytes = text.getBytes();
+        System.out.println("Text in bytes: " + new String(bytes));
+    }
+
+    // Method to demonstrate getChars()
+    private static void demonstrateGetChars(String text, Scanner scanner) {
+        System.out.println("Enter the start and end positions to extract characters:");
+        int start = scanner.nextInt();
+        int end = scanner.nextInt();
+        scanner.nextLine();  // Consume the newline character
+        char[] charArray = new char[end - start + 1];
+        text.getChars(start, end + 1, charArray, 0);
+        System.out.println("Extracted characters: " + new String(charArray));
+    }
+
+    // Method to demonstrate indexOf()
+    private static void demonstrateIndexOf(String text, Scanner scanner) {
+        System.out.println("Enter a substring to find its index in the text:");
+        String substring = scanner.nextLine();
+        int index = text.indexOf(substring);
+        System.out.println("Index of the substring: " + index);
+    }
+
+    // Method to demonstrate intern()
+    private static void demonstrateIntern(String text, Scanner scanner) {
+        String internedText = text.intern();
+        System.out.println("Interned text: " + internedText);
+    }
+
+    // Method to demonstrate isEmpty()
+    private static void demonstrateIsEmpty(String text) {
+        boolean isEmpty = text.isEmpty();
+        System.out.println("Is the text empty? " + isEmpty);
+    }
+
+    // Method to demonstrate join()
+    private static void demonstrateJoin(String text, Scanner scanner) {
+        System.out.println("Enter a delimiter to join the text with itself:");
+        String delimiter = scanner.nextLine();
+        String joinedText = String.join(delimiter, text, text);
+        System.out.println("Joined text: " + joinedText);
+    }
+
+    // Method to demonstrate lastIndexOf()
+    private static void demonstrateLastIndexOf(String text, Scanner scanner) {
+        System.out.println("Enter a substring to find its last index in the text:");
+        String substring = scanner.nextLine();
+        int lastIndex = text.lastIndexOf(substring);
+        System.out.println("Last index of the substring: " + lastIndex);
+    }
+
+    // Method to demonstrate length()
+    private static void demonstrateLength(String text) {
+        int length = text.length();
+        System.out.println("Text length: " + length);
+    }
+
+    // Method to demonstrate replace()
+    private static void demonstrateReplace(String text, Scanner scanner) {
+        System.out.println("Enter a substring to replace and its replacement:");
+        String target = scanner.nextLine();
+        String replacement = scanner.nextLine();
+        String replacedText = text.replace(target, replacement);
+        System.out.println("Replaced text: " + replacedText);
+    }
+
+    // Method to demonstrate replaceAll()
+    private static void demonstrateReplaceAll(String text, Scanner scanner) {
+        System.out.println("Enter a regular expression and its replacement:");
+        String regex = scanner.nextLine();
+        String replacement = scanner.nextLine();
+        String replacedText = text.replaceAll(regex, replacement);
+        System.out.println("Replaced text: " + replacedText);
+    }
+
+    // Method to demonstrate split()
+    private static void demonstrateSplit(String text, Scanner scanner) {
+        System.out.println("Enter a regular expression to split the text:");
+        String regex = scanner.nextLine();
+        String[] splitText = text.split(regex);
+        System.out.println("Split text:");
+        for (String part : splitText) {
+            System.out.println(part);
+        }
+    }
+
+    // Method to demonstrate startsWith()
+    private static void demonstrateStartsWith(String text, Scanner scanner) {
+        System.out.println("Enter a prefix to check if the text starts with it:");
+        String prefix = scanner.nextLine();
+        boolean startsWith = text.startsWith(prefix);
+        System.out.println("Does the text start with the prefix? " + startsWith);
+    }
+
+    // Method to demonstrate substring()
+    private static void demonstrateSubstring(String text, Scanner scanner) {
+        System.out.println("Enter the start and end positions to extract a substring:");
+        int start = scanner.nextInt();
+        int end = scanner.nextInt();
+        scanner.nextLine();  // Consume the newline character
+        if (start >= 0 && end <= text.length() && start <= end) {
+            String subString = text.substring(start, end);
+            System.out.println("Extracted substring: " + subString);
+        } else {
+            System.out.println("Invalid positions. Start and end should be within the string length.");
+        }
+    }
+
+    // Method to demonstrate toCharArray()
+    private static void demonstrateToCharArray(String text) {
+        char[] charArray = text.toCharArray();
+        System.out.println("Text as a character array: " + new String(charArray));
+    }
+
+    // Method to demonstrate toLowerCase()
+    private static void demonstrateToLowerCase(String text) {
+        String lowerCase = text.toLowerCase();
+        System.out.println("Text in lowercase: " + lowerCase);
+    }
+
+    // Method to demonstrate toUpperCase()
+    private static void demonstrateToUpperCase(String text) {
+        String upperCase = text.toUpperCase();
+        System.out.println("Text in uppercase: " + upperCase);
+    }
+
+    // Method to demonstrate trim()
+    private static void demonstrateTrim(String text) {
+        String trimmedText = text.trim();
+        System.out.println("Trimmed text: " + trimmedText);
+    }
+}
