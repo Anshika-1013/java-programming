@@ -1,0 +1,67 @@
+public class StringMethodsDemo {
+    public static void main(String[] args) {
+        String text = "We realizes that while our workers were thriving, " +
+                      "the surrounding villages were still suffering. It " +
+                      "became our goal to uplift their quality of life as " +
+                      "well. I remember seeing a family of 4 on a motorbike " +
+                      "in the heavy Bombay rain — I knew I wanted to do more " +
+                      "for these families who were risking their lives for " +
+                      "lack of an alternative.” The alternative mentioned here " +
+                      "is the Tata Nano, which soon after came as the world’s " +
+                      "cheapest car on retail at a starting price of only Rs 1 lakh.";
+
+        // String charAt()
+        char character = text.charAt(20);
+        System.out.println("charAt(20): " + character);
+
+        // String compareTo()
+        String otherText = "We realize...";
+        int compareToResult = text.compareTo(otherText);
+        System.out.println("compareTo: " + compareToResult);
+
+        // String concat()
+        String concatenatedText = text.concat(" This is additional text.");
+        System.out.println("concat: " + concatenatedText);
+
+        // String contains()
+        boolean containsResult = text.contains("Tata Nano");
+        System.out.println("contains(\"Tata Nano\"): " + containsResult);
+
+        // String endsWith()
+        boolean endsWithResult = text.endsWith("Rs 1 lakh.");
+        System.out.println("endsWith(\"Rs 1 lakh.\"): " + endsWithResult);
+
+        // String equals()
+        boolean equalsResult = text.equals(otherText);
+        System.out.println("equals: " + equalsResult);
+
+        // String equalsIgnoreCase()
+        boolean equalsIgnoreCaseResult = text.equalsIgnoreCase(otherText);
+        System.out.println("equalsIgnoreCase: " + equalsIgnoreCaseResult);
+
+        // String format()
+        String formattedText = String.format("This is a formatted string: %s", text);
+        System.out.println("format: " + formattedText);
+
+        // String getBytes()
+        byte[] bytes = text.getBytes();
+        System.out.println("getBytes(): " + new String(bytes));
+
+        // String getChars()
+        char[] charArray = new char[20];
+        text.getChars(10, 30, charArray, 0);
+        System.out.println("getChars(): " + new String(charArray));
+
+        // String indexOf()
+        int indexOfResult = text.indexOf("Bombay");
+        System.out.println("indexOf(\"Bombay\"): " + indexOfResult);
+
+        // String intern()
+        String internedText = text.intern();
+        System.out.println("intern: " + (text == internedText));
+
+        // String isEmpty()
+        boolean isEmptyResult = text.isEmpty();
+        System.out.println("isEmpty(): " + isEmptyResult);
+    }
+}
