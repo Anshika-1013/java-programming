@@ -1,0 +1,16 @@
+class Static2 {
+    final int a = 5;
+
+    public static void main(String[] args) {
+        int a = 6;
+        System.out.println(a);
+    }
+}
+//Error Explanation:
+
+In the Static1 class, you declared a final variable a and attempted to reassign its value in the main method.
+The final keyword, when applied to a variable, indicates that the variable's value cannot be changed after it has been assigned. Therefore, trying to assign a new value to a in the main method results in a compilation error.
+The error message would be something like "cannot assign a value to final variable a."
+Correction:
+
+To fix the error, you can either remove the final keyword if you intend to modify the variable, or you can initialize it with the desired value during its declaration
