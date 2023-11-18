@@ -1,0 +1,93 @@
+Google Classroom
+Classroom
+II MCA - A
+JAVA PROGRAMMING_MCA272
+Home
+Calendar
+Enrolled
+To-do
+M
+MCA -A SEC-SOFTWARE ENGG
+A
+M
+MCA A - SPD - 2nd Trimester
+A
+O
+OPERATING SYSTEMS -II-MCA-A
+A
+I
+II MCA - A
+JAVA PROGRAMMING_MCA272
+M
+MCA232-Applied Statistics using R
+2MCA-A
+D
+DATA STRUCTURES --23-24-2MCA A
+1
+1 MCA - RM
+A
+1
+1MCA - ADT
+A
+M
+MCA-COD-2023-24
+A
+1
+1_Trimester_CLanguage_2023_batch
+A
+Archived classes
+Settings
+P-2Assignment details
+P-2
+SURESH K COMPUTER SCIENCE
+•
+Yesterday
+100 points
+Due Yesterday, 11:00 AM
+Implement the concept of Static & Final Keyword based on your Domain.
+Class comments
+Your work
+Turned in
+
+ANSHIKA YADAV 2347103 - P-2
+Google Docs
+
+Supermarket.java
+Java
+Private comments
+public class Supermarket {
+
+    private static int totalItems = 0;
+
+    private final String supermarketName;
+
+    public Supermarket(String name) {
+        this.supermarketName = name;
+    }
+
+    public void addItem(String itemName, int quantity) {
+        
+        totalItems += quantity;
+
+
+        System.out.println(quantity + " " + itemName + "(s) added to the inventory of " + supermarketName);
+    }
+
+
+    public static int getTotalItems() {
+        return totalItems;
+    }
+
+    public static void main(String[] args) {
+        Supermarket supermarket1 = new Supermarket("SuperMart");
+        Supermarket supermarket2 = new Supermarket("MegaStore");
+
+        supermarket1.addItem("Bread", 100);
+        supermarket2.addItem("Milk", 50);
+
+       
+        System.out.println("Total items in all supermarkets: " + Supermarket.getTotalItems());
+    }
+}
+Supermarket.java
+Displaying Supermarket.java.
