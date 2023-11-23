@@ -1,0 +1,42 @@
+// Java program to implement super keyword
+// Class definition
+class Animal {
+    // Instance variable
+    String color = "White";
+
+    // Constructor
+    Animal() {
+        System.out.println("Animal constructor");
+    }
+
+    // Method definition
+    public void eat() {
+        System.out.println("Animal is eating");
+    }
+}
+
+// Inheriting class Animal
+class Dog extends Animal {
+    // Instance variable (Note: Correct the lowercase 's' to uppercase 'S')
+    String color = "Brown";
+
+    // Constructor
+    Dog() {
+        super(); // It will call the constructor of Animal
+        System.out.println("Dog Constructor");
+    }
+
+    // Method
+    public void display() {
+        System.out.println("Dog color: " + color); // Accessing the color field of the subclass
+        System.out.println("Animal color: " + super.color); // Accessing the color field of the superclass
+    }
+}
+
+// Main class
+public class SuperKeywordExample {
+    public static void main(String[] args) {
+        Dog myDog = new Dog(); // Creating an instance of the Dog class
+        myDog.display(); // Calling the display() method of the Dog class
+    }
+}
