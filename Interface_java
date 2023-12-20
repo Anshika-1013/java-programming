@@ -1,0 +1,179 @@
+// Interface for Product-related operations
+interface ProductOperations {
+    void addProduct(String productName, double price);
+    void removeProduct(String productName);
+}
+
+// Interface for Employee-related operations
+interface EmployeeOperations {
+    void hireEmployee(String employeeName, String role);
+    void fireEmployee(String employeeName);
+}
+
+// Interface for Sales-related operations
+interface SalesOperations {
+    void processSale(String productName, int quantity);
+    double calculateTotalRevenue();
+}
+
+// New Interface for Supermarket Operations combining the above three interfaces
+interface SupermarketOperations extends ProductOperations, EmployeeOperations, SalesOperations {
+    // Additional method specific to Supermarket operations can be added here
+    void performSupermarketOperation();
+}
+
+// Class representing Supermarket employees
+class SupermarketEmployee implements EmployeeOperations {
+    @Override
+    public void hireEmployee(String employeeName, String role) {
+        // Implementation for hiring an employee
+        System.out.println("Hired employee: " + employeeName + " as " + role);
+    }
+
+    @Override
+    public void fireEmployee(String employeeName) {
+        // Implementation for firing an employee
+        System.out.println("Fired employee: " + employeeName);
+    }
+}
+
+// Class representing Supermarket inventory
+class Inventory implements ProductOperations {
+    @Override
+    public void addProduct(String productName, double price) {
+        // Implementation for adding a product to the inventory
+        System.out.println("Added product: " + productName + " with price $" + price);
+    }
+
+    @Override
+    public void removeProduct(String productName) {
+        // Implementation for removing a product from the inventory
+        System.out.println("Removed product: " + productName);
+    }
+}
+
+// Class representing Supermarket sales
+class Sales implements SalesOperations {
+    private double totalRevenue = 0;
+
+    @Override
+    public void processSale(String productName, int quantity) {
+        // Implementation for processing a sale
+        System.out.println("Sold " + quantity + " units of " + productName);
+        // Assuming there's a method to get the price of the product based on its name
+        double price = getProductPrice(productName);
+        totalRevenue += price * quantity;
+    }
+
+    @Override
+    public double calculateTotalRevenue() {
+        // Implementation for calculating total revenue
+        return totalRevenue;
+    }
+
+    // Method to get the price of a product (dummy implementation)
+    private double getProductPrice(String productName) {
+        // Dummy implementation, should be replaced with actual logic
+        return 5.0;
+    }
+}
+
+// New class representing Supermarket operations
+class SupermarketManager implements SupermarketOperations {
+    private Sales sales = new Sales();  // Create an instance of Sales
+
+    @Override
+    public void addProduct(String productName, double price) {
+        // Implementation for adding a product
+        System.out.println("Added product: " + productName + " with price $" + price);
+    }
+
+    @Override
+    public void removeProduct(String productName) {
+        // Implementation for removing a product
+        System.out.println("Removed product: " + productName);
+    }
+
+    @Override
+    public void hireEmployee(String employeeName, String role) {
+        // Implementation for hiring an employee
+        System.out.println("Hired employee: " + employeeName + " as " + role);
+    }
+
+    @Override
+    public void fireEmployee(String employeeName) {
+        // Implementation for firing an employee
+        System.out.println("Fired employee: " + employeeName);
+    }
+
+    @Override
+    public void processSale(String productName, int quantity) {
+        // Implementation for processing a sale
+        System.out.println("Sold " + quantity + " units of " + productName);
+        // Assuming there's a method to get the price of the product based on its name
+        double price = getProductPrice(productName);
+        // Update total revenue using the Sales instance
+        sales.processSale(productName, quantity);
+    }
+
+    @Override
+    public double calculateTotalRevenue() {
+        // Implementation for calculating total revenue using the Sales instance
+        return sales.calculateTotalRevenue();
+    }
+
+    @Override
+    public void performSupermarketOperation() {
+        // Implementation for a specific Supermarket operation
+        System.out.println("Performing Supermarket-specific operation");
+    }
+
+    // Method to get the price of a product (dummy implementation)
+    private double getProductPrice(String productName) {
+        // Dummy implementation, should be replaced with actual logic
+        return 5.0;
+    }
+}
+
+// Another class representing Advanced Sales operations
+class AdvancedSales implements SalesOperations {
+    private double totalRevenue = 0;
+
+    @Override
+    public void processSale(String productName, int quantity) {
+        // Implementation for advanced processing of a sale
+        System.out.println("Advanced sale: Sold " + quantity + " units of " + productName);
+        // Assuming there's a method to get the price of the product based on its name
+        double price = getProductPrice(productName);
+        totalRevenue += price * quantity;
+    }
+
+    @Override
+    public double calculateTotalRevenue() {
+        // Implementation for advanced calculation of total revenue
+        System.out.println("Advanced Total Revenue: $" + totalRevenue);
+        return totalRevenue;
+    }
+
+    // Method to get the price of a product (dummy implementation)
+    private double getProductPrice(String productName) {
+        // Dummy implementation, should be replaced with actual logic
+        return 5.0;
+    }
+}
+
+// Main class to demonstrate the usage of interfaces and classes
+public class SupermarketSystem_p4 {
+    public static void main(String[] args) {
+        // Example usage of interfaces and classes
+        SupermarketOperations supermarketManager = new SupermarketManager();
+        supermarketManager.addProduct("Fruits", 3.0);
+        supermarketManager.hireEmployee("Jane Doe", "Manager");
+        supermarketManager.processSale("Vegetables", 2);
+        supermarketManager.performSupermarketOperation();
+
+        SalesOperations advancedSalesManager = new AdvancedSales();
+        advancedSalesManager.processSale("Electronics", 5);
+        advancedSalesManager.calculateTotalRevenue();
+    }
+}
