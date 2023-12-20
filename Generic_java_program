@@ -1,0 +1,87 @@
+// Define a Product class
+class Product {
+    private String name;
+    private double price;
+    private int quantity;
+    private boolean isAvailable;
+    private double weight;
+    private String category;
+
+    public Product(String name, double price, int quantity, boolean isAvailable, double weight, String category) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.isAvailable = isAvailable;
+        this.weight = weight;
+        this.category = category;
+    }
+
+    // getters
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+}
+
+// Define an interface
+interface Processor<T> {
+    void process(T t);
+}
+
+// Implement the interface in a class
+class PrintProcessor implements Processor<Product> {
+    public void process(Product product) {
+        System.out.println("Product Name: " + product.getName());
+        System.out.println("Product Price: " + product.getPrice());
+        System.out.println("Product Quantity: " + product.getQuantity());
+        System.out.println("Product Availability: " + (product.isAvailable() ? "In Stock" : "Out of Stock"));
+        System.out.println("Product Weight: " + product.getWeight());
+        System.out.println("Product Category: " + product.getCategory());
+    }
+}
+
+// Define a generic class with multiple parameterized arguments
+class Container<T, U> {
+    private T item1;
+    private U item2;
+
+    public Container(T item1, U item2) {
+        this.item1 = item1;
+        this.item2 = item2;
+    }
+
+    public void processItems(Processor<T> processor1, Processor<U> processor2) {
+        processor1.process(item1);
+        processor2.process(item2);
+    }
+}
+
+// Usage
+public class Generic_demo{
+    public static void main(String[] args) {
+        Product product1 = new Product("Apple", 0.99, 100, true, 0.15, "Fruit");
+        Product product2 = new Product("Banana", 0.59, 200, false, 0.12, "Fruit");
+        Container<Product, Product> container = new Container<>(product1, product2);
+        PrintProcessor printProcessor = new PrintProcessor();
+        container.processItems(printProcessor, printProcessor);
+    }
+}
