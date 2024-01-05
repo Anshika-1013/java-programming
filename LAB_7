@@ -1,0 +1,81 @@
+import java.util.*;
+
+class Product {
+    String name;
+    double price;
+    int quantity;
+
+    Product(String name, double price, int quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    double getPrice() {
+        return price;
+    }
+
+    int getQuantity() {
+        return quantity;
+    }
+
+    void restock(int additionalQuantity) {
+        this.quantity += additionalQuantity;
+    }
+
+    void sell(int quantityToSell) {
+        if (this.quantity >= quantityToSell) {
+            this.quantity -= quantityToSell;
+        } else {
+            System.out.println("Not enough stock to sell " + quantityToSell + " " + this.name);
+        }
+    }
+}
+
+public class SuperMarket33 {
+    public static void main(String[] args) {
+        List<Product> productList = new ArrayList<>();
+
+        // Adding products to the list
+        productList.add(new Product("Apple", 0.5, 100));
+        productList.add(new Product("Banana", 0.2, 200));
+        productList.add(new Product("Orange", 0.8, 150));
+
+        // Using lambda expression to print all products
+        productList.forEach((product) -> System.out.println("Product Name: " + product.getName() + ", Price: " + product.getPrice() + ", Quantity: " + product.getQuantity()));
+
+        // Restock and sell products
+        productList.get(0).restock(50);
+        productList.get(1).sell(30);
+
+        // Print products after restocking and selling
+        productList.forEach((product) -> System.out.println("Product Name: " + product.getName() + ", Price: " + product.getPrice() + ", Quantity: " + product.getQuantity()));
+
+        // Search for a product
+        String searchProduct = "Apple";
+        productList.stream()
+                    .filter((product) -> product.getName().equals(searchProduct))
+                    .forEach((product) -> System.out.println("Found Product: " + product.getName() + ", Price: " + product.getPrice() + ", Quantity: " + product.getQuantity()));
+
+        // Calculate total value of stock
+        double totalValue = productList.stream()
+                                       .mapToDouble((product) -> product.getPrice() * product.getQuantity())
+                                       .sum();
+        System.out.println("Total value of stock in the supermarket: " + totalValue);
+    }
+}
+//Collection Framework: You’ve used an ArrayList from Java’s Collection Framework to store the products in the supermarket. This is a good choice as ArrayList provides the flexibility to add and remove products.
+
+Lambda Expressions: You’ve used Lambda expressions in several places:
+
+To print all products: productList.forEach((product) -> System.out.println(...));
+To search for a product: productList.stream().filter((product) -> product.getName().equals(searchProduct)).forEach((product) -> System.out.println(...));
+To calculate the total value of stock: double totalValue = productList.stream().mapToDouble((product) -> product.getPrice() * product.getQuantity()).sum();
+These are all valid and efficient uses of Lambda expressions.
+
+Additional Functionalities: Your program includes functionalities for restocking and selling products, 
+searching for a product, and calculating the total value of stock in the supermarket. These are all relevant and useful features for a supermarket management system.
