@@ -1,0 +1,133 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+
+public class BankManagementSystem extends JFrame {
+    private JTextField employeeIdTextField, nameTextField, ageTextField, designationTextField, departmentTextField;
+    private JTextArea resultTextArea;
+
+    public BankManagementSystem() {
+        setTitle("Bank Management System");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Bank Employee Information Panel
+        JPanel bankInfoPanel = new JPanel();
+        bankInfoPanel.setLayout(new GridLayout(5, 2, 10, 10));
+
+        bankInfoPanel.add(new JLabel("Employee ID:"));
+        employeeIdTextField = new JTextField();
+        bankInfoPanel.add(employeeIdTextField);
+
+        bankInfoPanel.add(new JLabel("Name:"));
+        nameTextField = new JTextField();
+        bankInfoPanel.add(nameTextField);
+
+        bankInfoPanel.add(new JLabel("Age:"));
+        ageTextField = new JTextField();
+        bankInfoPanel.add(ageTextField);
+
+        bankInfoPanel.add(new JLabel("Designation:"));
+        designationTextField = new JTextField();
+        bankInfoPanel.add(designationTextField);
+
+        bankInfoPanel.add(new JLabel("Department/Section:"));
+        departmentTextField = new JTextField();
+        bankInfoPanel.add(departmentTextField);
+
+        // Result Panel
+        JPanel resultPanel = new JPanel();
+        resultTextArea = new JTextArea(10, 30);
+        resultPanel.add(new JScrollPane(resultTextArea));
+
+        // Buttons Panel
+        JButton registerButton = new JButton("Register");
+        JButton searchButton = new JButton("Search");
+
+        registerButton.addActionListener(e -> registerEmployee());
+        searchButton.addActionListener(e -> searchEmployee());
+
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.add(registerButton);
+        buttonsPanel.add(searchButton);
+
+        // Main Frame Layout
+        setLayout(new BorderLayout());
+        add(bankInfoPanel, BorderLayout.NORTH);
+        add(resultPanel, BorderLayout.CENTER);
+        add(buttonsPanel, BorderLayout.SOUTH);
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+
+    private void registerEmployee() {
+        try {
+            // Establish database connection (Update connection details accordingly)
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database", "username", "password");
+
+            // Insert data into the 'Bank' table
+            String sql = "INSERT INTO Bank (EmployeeID, Name, Age, Designation, Department) VALUES (?, ?, ?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, employeeIdTextField.getText());
+                preparedStatement.setString(2, nameTextField.getText());
+                preparedStatement.setInt(3, Integer.parseInt(ageTextField.getText()));
+                preparedStatement.setString(4, designationTextField.getText());
+                preparedStatement.setString(5, departmentTextField.getText());
+
+                int rowsAffected = preparedStatement.executeUpdate();
+                if (rowsAffected > 0) {
+                    resultTextArea.setText("Employee registered successfully!");
+                } else {
+                    resultTextArea.setText("Failed to register employee.");
+                }
+            }
+
+            connection.close();
+        } catch (SQLException | NumberFormatException e) {
+            e.printStackTrace();
+            resultTextArea.setText("Error: " + e.getMessage());
+        }
+    }
+
+    private void searchEmployee() {
+        try {
+            // Establish database connection (Update connection details accordingly)
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/your_database", "username", "password");
+
+            // Search for employee based on name or department
+            String sql = "SELECT * FROM Bank WHERE Name LIKE ? OR Department LIKE ?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+                preparedStatement.setString(1, "%" + nameTextField.getText() + "%");
+                preparedStatement.setString(2, "%" + departmentTextField.getText() + "%");
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+                StringBuilder result = new StringBuilder();
+
+                while (resultSet.next()) {
+                    result.append("Employee ID: ").append(resultSet.getString("EmployeeID")).append("\n");
+                    result.append("Name: ").append(resultSet.getString("Name")).append("\n");
+                    result.append("Age: ").append(resultSet.getInt("Age")).append("\n");
+                    result.append("Designation: ").append(resultSet.getString("Designation")).append("\n");
+                    result.append("Department/Section: ").append(resultSet.getString("Department")).append("\n\n");
+                }
+
+                if (result.length() > 0) {
+                    resultTextArea.setText(result.toString());
+                } else {
+                    resultTextArea.setText("No matching records found.");
+                }
+            }
+
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            resultTextArea.setText("Error: " + e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(BankManagementSystem::new);
+    }
+}
