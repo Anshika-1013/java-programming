@@ -1,0 +1,163 @@
+import java.sql.*;
+
+public class SupermarketManagementSystem {
+
+    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    static final String DB_URL = "jdbc:mysql://localhost/";
+    static final String USER = "root";
+    static final String PASS = "root";
+
+    public static void main(String[] args) {
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            // Register JDBC driver
+
+            Class.forName(JDBC_DRIVER);
+
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+            stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS SupermarketManagementSystem");
+            stmt.executeUpdate("USE SupermarketManagementSystem");
+            // Open a connection
+            System.out.println("Connecting to database...");
+
+            // Create tables if not exists
+            createTables(conn);
+
+            // Insert records into Product table
+            insertProductRecords(conn);
+
+            // Insert records into Customer table
+            insertCustomerRecords(conn);
+
+            // Read records from Product table
+            readProductRecords(conn);
+
+            // Read records from Customer table
+            readCustomerRecords(conn);
+
+            // Update a record in Product table
+            updateProductRecord(conn, 1, 15.99);
+
+            // Delete a record from Customer table
+            deleteCustomerRecord(conn, 1);
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null)
+                    stmt.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try {
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+
+    private static void createTables(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+
+        String productTableSql = "CREATE TABLE IF NOT EXISTS Product (" +
+                "ProductID INT PRIMARY KEY AUTO_INCREMENT, " +
+                "ProductName VARCHAR(50), " +
+                "Category VARCHAR(50), " +
+                "Price DOUBLE)";
+        stmt.executeUpdate(productTableSql);
+
+        String customerTableSql = "CREATE TABLE IF NOT EXISTS Customer (" +
+                "CustomerID INT PRIMARY KEY AUTO_INCREMENT, " +
+                "FirstName VARCHAR(50), " +
+                "LastName VARCHAR(50), " +
+                "Age INT)";
+        stmt.executeUpdate(customerTableSql);
+
+        System.out.println("Tables created successfully.");
+        stmt.close();
+    }
+
+    private static void insertProductRecords(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+
+        String sql = "INSERT INTO Product (ProductName, Category, Price) " +
+                "VALUES ('Milk', 'Dairy', 2.99), " +
+                "('Bread', 'Bakery', 1.99), " +
+                "('Apple', 'Produce', 0.99)";
+        stmt.executeUpdate(sql);
+
+        System.out.println("Product records inserted successfully.");
+        stmt.close();
+    }
+
+    private static void insertCustomerRecords(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+
+        String sql = "INSERT INTO Customer (FirstName, LastName, Age) " +
+                "VALUES ('John', 'Doe', 30), " +
+                "('Alice', 'Smith', 25), " +
+                "('Bob', 'Johnson', 35)";
+        stmt.executeUpdate(sql);
+
+        System.out.println("Customer records inserted successfully.");
+        stmt.close();
+    }
+
+    private static void readProductRecords(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        String sql = "SELECT * FROM Product";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        while (rs.next()) {
+            System.out.println("ProductID: " + rs.getInt("ProductID") +
+                    ", ProductName: " + rs.getString("ProductName") +
+                    ", Category: " + rs.getString("Category") +
+                    ", Price: " + rs.getDouble("Price"));
+        }
+
+        rs.close();
+        stmt.close();
+    }
+
+    private static void readCustomerRecords(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        String sql = "SELECT * FROM Customer";
+        ResultSet rs = stmt.executeQuery(sql);
+
+        while (rs.next()) {
+            System.out.println("CustomerID: " + rs.getInt("CustomerID") +
+                    ", FirstName: " + rs.getString("FirstName") +
+                    ", LastName: " + rs.getString("LastName") +
+                    ", Age: " + rs.getInt("Age"));
+        }
+
+        rs.close();
+        stmt.close();
+    }
+
+    private static void updateProductRecord(Connection conn, int productID, double newPrice) throws SQLException {
+        Statement stmt = conn.createStatement();
+        String sql = "UPDATE Product SET Price = " + newPrice + " WHERE ProductID = " + productID;
+        stmt.executeUpdate(sql);
+
+        System.out.println("Product record updated successfully.");
+        stmt.close();
+    }
+
+    private static void deleteCustomerRecord(Connection conn, int customerID) throws SQLException {
+        Statement stmt = conn.createStatement();
+        String sql = "DELETE FROM Customer WHERE CustomerID = " + customerID;
+        stmt.executeUpdate(sql);
+
+        System.out.println("Customer record deleted successfully.");
+        stmt.close();
+    }
+}
